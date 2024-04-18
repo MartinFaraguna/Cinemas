@@ -1,0 +1,66 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<!-- <ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content> -->
+<ion-grid>
+  <ion-row class="ion-justify-content-center ion-align-items-center" style="height: 100%;">
+    <ion-col size-lg="6" size-md="8" size-xs="12">
+      <ion-card >
+        <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+        <ion-card-header>
+          <ion-card-title>Log IN</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-input
+            type="email"
+            fill="solid"
+            label="Email"
+            labelPlacement="floating"
+            helperText="Enter a valid email"
+            errorText="Invalid email"
+            ngModel
+            email
+          ></ion-input>
+
+          <br/>
+
+          <ion-input
+            type="password"
+            fill="solid"
+            label="password"
+            labelPlacement="floating"
+            helperText="Enter a valid password"
+            ngModel
+            passwod
+          ></ion-input>
+          <br/>
+
+          <ion-button color="success" expand="block">Login</ion-button>
+
+          <br/>
+          <ion-item routerLink="/auth/registro">
+            <ion-label class="link-label" >
+              Registrate
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label ion-label class="link-label">
+              Recuperar Password
+            </ion-label>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
