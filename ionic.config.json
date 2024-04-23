@@ -1,0 +1,7 @@
+{
+  "name": "Cinemas-prueba-firebase",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
