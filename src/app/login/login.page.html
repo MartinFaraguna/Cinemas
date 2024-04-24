@@ -12,39 +12,39 @@
         <ion-card-header>
           <ion-card-title>Log IN</ion-card-title>
         </ion-card-header>
-          <ion-card-content>
-            <ion-input
-              type="email"
-              fill="solid"
-              label="Email"
-              labelPlacement="floating"
-              helperText="Ingrese su email"
-              errorText="Invalid email"
-              [(ngModel)]="email"
-            ></ion-input>
+        <ion-card-content>
+          <ion-input
+            type="email"
+            fill="solid"
+            label="Email"
+            labelPlacement="floating"
+            helperText="Ingrese su email"
+            errorText="Invalid email"
+            [(ngModel)]="email"
+          ></ion-input>
 
-            <br />
+          <br />
 
-            <ion-input
-              type="password"
-              fill="solid"
-              label="password"
-              labelPlacement="floating"
-              helperText="Ingrese su contraseña"
-              [(ngModel)]="password"
-            ></ion-input>
-            <br />
+          <ion-input
+            type="password"
+            fill="solid"
+            label="password"
+            labelPlacement="floating"
+            helperText="Ingrese su contraseña"
+            [(ngModel)]="password"
+          ></ion-input>
+          <br />
 
-            <ion-button (click)="loginUser()" color="success" expand="block">Ingresar</ion-button>
-
-            <br />
-            <ion-item routerLink="/register">
-              Registrate
-            </ion-item>
-            <ion-item>
-              Recuperar contraseña
-            </ion-item>
-          </ion-card-content>
+          <ion-button
+            (click)="loginUser()"
+            color="success"
+            expand="block"
+            >Ingresar</ion-button
+          >
+          <br />
+          <ion-item routerLink="/register"> Registrate </ion-item>
+          <ion-item> Recuperar contraseña </ion-item>
+        </ion-card-content>
       </ion-card>
     </ion-col>
   </ion-row>

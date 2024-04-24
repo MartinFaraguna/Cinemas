@@ -12,50 +12,48 @@
         <ion-card-header>
           <ion-card-title>Register</ion-card-title>
         </ion-card-header>
-          <ion-card-content>
-            <ion-input
-              type="email"
-              fill="solid"
-              label="Email"
-              labelPlacement="floating"
-              helperText="Ingrese su email"
-              errorText="Invalid email"
-              [(ngModel)]="account.email"
-            ></ion-input>
+        <ion-card-content>
+          <ion-input
+            type="email"
+            fill="solid"
+            label="Email"
+            labelPlacement="floating"
+            helperText="Ingrese su email"
+            errorText="Invalid email"
+            [(ngModel)]="account.email"
+          ></ion-input>
 
-            <br />
+          <br />
 
-            <ion-input
-              type="password"
-              fill="solid"
-              label="password"
-              labelPlacement="floating"
-              helperText="Ingrese una nueva contraseña"
-              [(ngModel)]="account.password"
-            ></ion-input>
-            <br />
-            <ion-input
-              type="password"
-              fill="solid"
-              label="password"
-              labelPlacement="floating"
-              helperText="Repita la contraseña"
-              [(ngModel)]="account.passwordV"
-            ></ion-input>
-            <br />
+          <ion-input
+            type="password"
+            fill="solid"
+            label="password"
+            labelPlacement="floating"
+            helperText="Ingrese una nueva contraseña"
+            [(ngModel)]="account.password"
+          ></ion-input>
+          <br />
+          <ion-input
+            type="password"
+            fill="solid"
+            label="password"
+            labelPlacement="floating"
+            helperText="Repita la contraseña"
+            [(ngModel)]="account.passwordV"
+          ></ion-input>
+          <br />
 
-            <ion-button (click)="registerUser()" color="success" expand="block">Registrarse</ion-button>
+          <ion-button
+            (click)="registerUser()"
+            color="success"
+            expand="block"
+            >Registrarse</ion-button
+          >
 
-            <br />
-            <ion-item routerLink="/login">
-              Logueate
-            </ion-item>
-            <ion-item>
-              <ion-label ion-label class="link-label">
-                Recuperar Contraseña
-              </ion-label>
-            </ion-item>
-          </ion-card-content>
+          <br />
+          <ion-item routerLink="/login"> Logueate </ion-item>
+        </ion-card-content>
       </ion-card>
     </ion-col>
   </ion-row>
