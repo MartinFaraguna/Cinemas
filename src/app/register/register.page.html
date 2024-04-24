@@ -1,0 +1,62 @@
+<ion-grid>
+  <ion-row
+    class="ion-justify-content-center ion-align-items-center"
+    style="height: 100%"
+  >
+    <ion-col size-lg="6" size-md="8" size-xs="12">
+      <ion-card>
+        <img
+          alt="Silhouette of mountains"
+          src="https://www.avilatinoamerica.com/images/stories/AVI/Cinemas_Procinal_incorpora_Vive_Audio_a_su_nuevo_multiplex.jpg"
+        />
+        <ion-card-header>
+          <ion-card-title>Register</ion-card-title>
+        </ion-card-header>
+          <ion-card-content>
+            <ion-input
+              type="email"
+              fill="solid"
+              label="Email"
+              labelPlacement="floating"
+              helperText="Ingrese su email"
+              errorText="Invalid email"
+              [(ngModel)]="account.email"
+            ></ion-input>
+
+            <br />
+
+            <ion-input
+              type="password"
+              fill="solid"
+              label="password"
+              labelPlacement="floating"
+              helperText="Ingrese una nueva contraseña"
+              [(ngModel)]="account.password"
+            ></ion-input>
+            <br />
+            <ion-input
+              type="password"
+              fill="solid"
+              label="password"
+              labelPlacement="floating"
+              helperText="Repita la contraseña"
+              [(ngModel)]="account.passwordV"
+            ></ion-input>
+            <br />
+
+            <ion-button (click)="registerUser()" color="success" expand="block">Registrarse</ion-button>
+
+            <br />
+            <ion-item routerLink="/login">
+              Logueate
+            </ion-item>
+            <ion-item>
+              <ion-label ion-label class="link-label">
+                Recuperar Contraseña
+              </ion-label>
+            </ion-item>
+          </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
