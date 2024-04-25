@@ -11,7 +11,7 @@ import { AlertController } from '@ionic/angular';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage  {
   // Initialize Firebase
   app = initializeApp(environment.firebase);
   // Initialize Firebase Authentication and get a reference to the service
@@ -26,7 +26,6 @@ export class LoginPage implements OnInit {
     private alertController: AlertController
   ) {}
 
-  ngOnInit() {}
 
   loginUser() {
     this.showLoading();
@@ -65,6 +64,6 @@ export class LoginPage implements OnInit {
     });
 
     await alert.present();
-    
+
   }
 }

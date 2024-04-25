@@ -11,7 +11,7 @@ import { AlertController } from '@ionic/angular';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage  {
   app = initializeApp(environment.firebase);
   auth = getAuth();
 
@@ -23,7 +23,7 @@ export class RegisterPage implements OnInit {
     private alertController: AlertController
   ) {}
 
-  ngOnInit() {}
+
 
   registerUser() {
     this.showLoading();
@@ -49,7 +49,7 @@ export class RegisterPage implements OnInit {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log(errorCode);          
+          console.log(errorCode);
           console.log(errorMessage);
           this.loadingCtrl.dismiss();
           this.presentAlert();
