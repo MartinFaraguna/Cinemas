@@ -34,7 +34,7 @@ export class PelisService {
 
   // Método para obtener la lista de películas populares
   getPopularMovies(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/movie/popular?api_key=${this.apiKey}`);
+    return this.http.get(`${this.apiUrl}/movie/popular?language=es-ar&page=1&api_key=${this.apiKey}`);
   }
 
   // Otros métodos para obtener detalles de películas, buscar películas, etc.

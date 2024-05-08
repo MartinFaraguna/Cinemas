@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PelisService } from '../shared/services/pelis.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,10 @@ export class HomePage implements OnInit{
 
   popularMovies: any[] = [];
 
-  constructor( private pelisService: PelisService) {}
+
+  constructor( private pelisService: PelisService,
+                private router: Router
+  ) {}
 
   ngOnInit() {
     this.pelisService.getPopularMovies().subscribe(data => {
@@ -34,6 +38,10 @@ export class HomePage implements OnInit{
     } else {
       return 'assets/placeholder.jpg'; // Puedes usar una imagen de relleno en caso de que la película no tenga póster
     }
+  }
+
+  logout() {
+    this.router.navigate(['/login']);
   }
 
 }

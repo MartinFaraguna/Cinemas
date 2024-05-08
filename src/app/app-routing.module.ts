@@ -22,7 +22,15 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },  {
+    path: 'pelicula',
+    loadChildren: () => import('./pelicula/pelicula.module').then( m => m.PeliculaPageModule)
+  },
+  {
+    path: 'compra',
+    loadChildren: () => import('./compra/compra.module').then( m => m.CompraPageModule)
   }
+
 
 ];
 

@@ -26,7 +26,10 @@ export class LoginPage  {
     private alertController: AlertController
   ) {}
 
-
+/**
+ * @Fuction loginUser
+ * @description es para poder logiarse realizando la autenticación contra firebase
+ */
   loginUser() {
     this.showLoading();
     signInWithEmailAndPassword(this.auth, this.email, this.password)
@@ -49,6 +52,10 @@ export class LoginPage  {
       });
   }
 
+/**
+ * @function showLoading
+ * @descripcion muestra un loading
+ */
   async showLoading() {
     const loading = await this.loadingCtrl.create({
       message: 'Cargando...',
