@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
-import { environment } from 'src/environments/environment';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
+
+import { AuthService } from '../shared/services/auth.service';
+import { AlertService } from '../shared/services/alert.service';
 
 @Component({
   selector: 'app-register',
@@ -12,76 +11,35 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage  {
-  app = initializeApp(environment.firebase);
-  auth = getAuth();
 
   account = {} as any;
 
   constructor(
     private router: Router,
     private loadingCtrl: LoadingController,
-    private alertController: AlertController
+    private authService: AuthService,
+    private alertservice: AlertService
   ) {}
 
 
 
-  registerUser() {
-    this.showLoading();
+  async registerUser() {
+
     if (this.account.password != this.account.passwordV) {
-      console.log('Las contraseñas no coinciden');
-      this.loadingCtrl.dismiss();
-      this.presentAlertCoincidencia();
-    } else {
-      createUserWithEmailAndPassword(
-        this.auth,
-        this.account.email,
-        this.account.password
-      )
-        .then((userCredential) => {
-          // Signed up
-          const user = userCredential.user;
-          this.loadingCtrl.dismiss();
-          this.router.navigate(['/home']);
-          console.log(user);
-          this.loadingCtrl.dismiss();
-          // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode);
-          console.log(errorMessage);
-          this.loadingCtrl.dismiss();
-          this.presentAlert();
-
-          // ..
-        });
+      this.alertservice.presentAlertCoincidencia();
+      this.account.password = '';
+      this.account.passwordV = '';
     }
-  }
+    else {
+        this.alertservice.showLoading();
+        if(await this.authService.RegisterUser(this.account.email, this.account.password)){
+          this.loadingCtrl.dismiss();
+          this.router.navigate(['/login']);
 
-  async showLoading() {
-    const loading = await this.loadingCtrl.create({
-      message: 'Cargando...',
-    });
-
-    await loading.present();
-  }
-
-  async presentAlertCoincidencia() {
-    const alert = await this.alertController.create({
-      message: 'Las contraseñas no coinciden',
-      buttons: ['Action'],
-    });
-
-    await alert.present();
-  }
-
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      message: 'Error',
-      buttons: ['Action'],
-    });
-
-    await alert.present();
+        }else{
+          this.loadingCtrl.dismiss();
+          this.alertservice.Errorgeneric();
+        }
+    }
   }
 }

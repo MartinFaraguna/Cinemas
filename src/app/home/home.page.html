@@ -33,7 +33,7 @@
       style="height: 100vh"
     >
       <ion-col size-lg="5" size-md="8" size-xs="12">
-        <ion-card *ngFor="let movie of popularMovies">
+        <ion-card *ngFor="let movie of popularMovies" (click)="openDetails(movie)">
           <img [src]="getImageUrl(movie.poster_path)" alt="Movie Poster">
           <ion-card-header>
             <ion-card-title>{{ movie.title }}</ion-card-title>

@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { environment } from 'src/environments/environment';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
+
+import { AuthService } from '../shared/services/auth.service'
+import { AlertService } from '../shared/services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -12,65 +11,38 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage  {
-  // Initialize Firebase
-  app = initializeApp(environment.firebase);
-  // Initialize Firebase Authentication and get a reference to the service
-  auth = getAuth(this.app);
 
+/**
+ * @descripcion email y password son varibles para el login
+ */
   email = '';
   password = '';
 
   constructor(
     private router: Router,
     private loadingCtrl: LoadingController,
-    private alertController: AlertController
+    private authService: AuthService,
+    private alertservice: AlertService
   ) {}
 
 /**
  * @Fuction loginUser
- * @description es para poder logiarse realizando la autenticación contra firebase
+ * @description
  */
-  loginUser() {
-    this.showLoading();
-    signInWithEmailAndPassword(this.auth, this.email, this.password)
-      .then((userCredential) => {
-        // Signed in
-        this.loadingCtrl.dismiss();
-        const user = userCredential.user;
-        this.router.navigate(['/home']);
-        console.log(user);
+  async loginUser() {
 
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(error.code);
-        console.log(error.message);
-        this.loadingCtrl.dismiss();
-        this.presentAlert();
-      });
-  }
+    this.alertservice.showLoading();
 
-/**
- * @function showLoading
- * @descripcion muestra un loading
- */
-  async showLoading() {
-    const loading = await this.loadingCtrl.create({
-      message: 'Cargando...',
-    });
-
-    await loading.present();
-  }
-
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      message: 'Credenciales Incorrectas. Por favor \n ingrese nuevamente',
-      buttons: ['Cerrar'],
-    });
-
-    await alert.present();
-
+    if(await this.authService.LoginUser(this.email, this.password)){
+      this.loadingCtrl.dismiss();
+      this.router.navigate(['/home']);
+      this.email = '';
+      this.password = '';
+    }else{
+      this.loadingCtrl.dismiss();
+      this.alertservice.Malcredenciales();
+      this.email = '';
+      this.password = '';
+    }
   }
 }

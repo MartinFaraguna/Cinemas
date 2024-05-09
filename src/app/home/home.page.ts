@@ -18,17 +18,8 @@ export class HomePage implements OnInit{
 
   ngOnInit() {
     this.pelisService.getPopularMovies().subscribe(data => {
-      this.popularMovies = data.results; // 'results' contiene la lista de películas populares en la respuesta de la API
+      this.popularMovies = data.results;
     });
-  }
-
-
-  obtenerPeliculas() {
-    this.pelisService.getPopularMovies().subscribe(
-      (data) => {
-        console.log(data);
-      }
-    )
   }
 
   // Método para obtener la URL completa de la imagen de la película
@@ -44,4 +35,8 @@ export class HomePage implements OnInit{
     this.router.navigate(['/login']);
   }
 
+  openDetails(movie: any) {
+    this.router.navigate(['/pelicula']);
+    localStorage.setItem('movie', JSON.stringify(movie));
+  }
 }
