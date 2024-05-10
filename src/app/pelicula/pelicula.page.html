@@ -38,9 +38,11 @@
           </ion-card-header>
           <ion-card-content>
             <p>{{overview}}</p>
+            <p>Duracion:{{runtime}}</p>
           </ion-card-content>
         </ion-card>
-        <ion-button>Comprar</ion-button>
+        <ion-button id="btnComprar" color="success" size="large" (click)="Comprar()">Comprar</ion-button>
+        <ion-button id="btnVolver" color="dark" size="large" (click)="Volver()">Volver</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

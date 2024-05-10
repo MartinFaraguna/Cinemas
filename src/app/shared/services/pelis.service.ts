@@ -37,5 +37,7 @@ export class PelisService {
     return this.http.get(`${this.apiUrl}/movie/popular?language=es-ar&page=1&api_key=${this.apiKey}`);
   }
 
-  // Otros métodos para obtener detalles de películas, buscar películas, etc.
+  getDetalleMovie(id:string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/movie/${id}?language=es-ar&api_key=${this.apiKey}`);
+  }
 }

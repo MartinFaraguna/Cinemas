@@ -4,10 +4,28 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">compra</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content >
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-label class="pantalla">Pantalla</ion-label>
+      </ion-col>
+      <ion-col size="2" *ngFor="let seat of seats">
+        <ion-button [color]="getSeatColor(seat)" (click)="selectSeat(seat)">
+          {{ seat }}
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-label >Butacas Seleccionadas: {{ selectedSeats.length }}</ion-label>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label >Butacas Seleccionadas:{{ selectedSeats.join(', ') }} </ion-label>
+      </ion-col>
+
+      <ion-col>
+        <ion-button>Comprar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
