@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 
@@ -9,7 +10,14 @@ import { Component } from '@angular/core';
 })
 export class CompraPage {
 
-  constructor() { }
+  cantidadcombo: number = 0;
+  cantidadpochoclo: number = 0;
+  cantidadbebida: number = 0;
+
+  constructor( private router: Router) { }
+
+  public butacas: boolean = false;
+  public kandy: boolean = true;
 
   seats: string[] = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6',
                      'B1', 'B2', 'B3', 'B4', 'B5', 'B6',
@@ -33,4 +41,39 @@ export class CompraPage {
     }
   }
 
+  ComprarButacas(){
+    this.butacas = !this.butacas;
+    this.kandy = !this.kandy
+  }
+
+  Volver() {
+    this.router.navigate(['/pelicula']);
+    localStorage.clear();
+  }
+
+  Mas(tipo:string,cantidad:number){
+
+    if(tipo == 'cantidadcombo'){
+      this.cantidadcombo = cantidad + 1
+    }
+    if(tipo == 'cantidadpochoclo'){
+      this.cantidadpochoclo = cantidad + 1
+    }
+    if(tipo == 'cantidadbebida'){
+      this.cantidadbebida = cantidad + 1
+    }
+  }
+  Menos(tipo:string,cantidad:number){
+    if(cantidad > 0){
+      if(tipo == 'cantidadcombo'){
+        this.cantidadcombo = cantidad - 1
+      }
+      if(tipo == 'cantidadpochoclo'){
+        this.cantidadpochoclo = cantidad - 1
+      }
+      if(tipo == 'cantidadbebida'){
+        this.cantidadbebida = cantidad - 1
+      }
+    }
+  }
 }

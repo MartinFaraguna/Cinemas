@@ -38,5 +38,6 @@ export class HomePage implements OnInit{
   openDetails(movie: any) {
     this.router.navigate(['/pelicula']);
     localStorage.setItem('movie', JSON.stringify(movie));
+    localStorage.setItem('moviebk', JSON.stringify(movie));
   }
 }
