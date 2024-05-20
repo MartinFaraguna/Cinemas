@@ -7,43 +7,48 @@
       <ion-card>
         <img
           alt="Silhouette of mountains"
-          src="https://www.avilatinoamerica.com/images/stories/AVI/Cinemas_Procinal_incorpora_Vive_Audio_a_su_nuevo_multiplex.jpg"
+          src="../../assets/LogIn.jpg"
         />
         <ion-card-header>
           <ion-card-title>Log IN</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <ion-input
-            type="email"
-            fill="solid"
-            label="Email"
-            labelPlacement="floating"
-            helperText="Ingrese su email"
-            errorText="Invalid email"
-            [(ngModel)]="email"
-          ></ion-input>
+          <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
 
-          <br />
+            <ion-input
+              type="email"
+              fill="solid"
+              label="Email"
+              labelPlacement="floating"
+              helperText="Ingrese su Email"
+              errorText="Invalid email"
+              formControlName="email"
+            ></ion-input>
 
-          <ion-input
-            type="password"
-            fill="solid"
-            label="password"
-            labelPlacement="floating"
-            helperText="Ingrese su contraseña"
-            [(ngModel)]="password"
-          ></ion-input>
-          <br />
+            <br />
 
-          <ion-button
-            (click)="loginUser()"
-            color="success"
-            expand="block"
-            >Ingresar</ion-button
-          >
-          <br />
-          <ion-item routerLink="/register"> Registrate </ion-item>
-          <ion-item routerLink="/forgotpassword"> Recuperar contraseña </ion-item>
+            <ion-input
+              type="password"
+              fill="solid"
+              label="Password"
+              labelPlacement="floating"
+              helperText="Ingrese su contraseña"
+              errorText="Invalid password"
+              formControlName="password"
+            ></ion-input>
+            <br/>
+            <ion-button
+              type="submit"
+              color="success"
+              expand="block"
+              [disabled]="loginForm.invalid"
+            >Ingresar</ion-button>
+          </form>
+
+          <br/>
+          <ion-button fill="clear" size="small" routerLink="/register">Registrate</ion-button>
+          <br/>
+          <ion-button fill="clear" size="small" routerLink="/forgotpassword">Recuperar contraseña</ion-button>
         </ion-card-content>
       </ion-card>
     </ion-col>

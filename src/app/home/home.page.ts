@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 })
 export class HomePage implements OnInit{
 
+  /**
+   * @var popularMovies: any[]
+   */
   popularMovies: any[] = [];
 
 
@@ -22,7 +25,11 @@ export class HomePage implements OnInit{
     });
   }
 
-  // Método para obtener la URL completa de la imagen de la película
+
+  /**   *
+   * @param posterPath string
+   * @description Retorna la URL completa de la imagen o se rellena con una imagen de relleno
+   */
   getImageUrl(posterPath: string): string {
     if (posterPath) {
       return `https://image.tmdb.org/t/p/w500${posterPath}`;
@@ -31,10 +38,18 @@ export class HomePage implements OnInit{
     }
   }
 
+  /**
+   * @description redirige al login
+   */
   logout() {
     this.router.navigate(['/login']);
   }
 
+  /**
+   * @param movie: any
+   * @description redirige a la pagina de la pelicula
+   * y almacena la pelicula en el local storage
+   */
   openDetails(movie: any) {
     this.router.navigate(['/pelicula']);
     localStorage.setItem('movie', JSON.stringify(movie));

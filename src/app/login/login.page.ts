@@ -4,6 +4,7 @@ import { LoadingController } from '@ionic/angular';
 
 import { AuthService } from '../shared/services/auth.service'
 import { AlertService } from '../shared/services/alert.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -13,36 +14,48 @@ import { AlertService } from '../shared/services/alert.service';
 export class LoginPage  {
 
 /**
- * @descripcion email y password son varibles para el login
+ * @var loginForm
+ * @var email
+ * @var password
+ *
  */
-  email = '';
-  password = '';
+
+  loginForm: FormGroup;
+  email: any;
+  password: any;
 
   constructor(
     private router: Router,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
-    private alertservice: AlertService
-  ) {}
+    private alertservice: AlertService,
+    private formBuilder: FormBuilder
+  ) {
+    this.loginForm=this.formBuilder.group({
+      email: ['',[Validators.required, Validators.email]],
+      password: ['',[Validators.required]]
+    })
+  }
 
 /**
- * @Fuction loginUser
- * @description
+ * loginUser
+ * @description llama al servicio de autenticacion para el login,utilizando el email y password
+ * si el usuario es correcto redirecciona al home
  */
   async loginUser() {
+    if(this.loginForm.valid){
+      this.alertservice.showLoading();
 
-    this.alertservice.showLoading();
+      if(await this.authService.LoginUser(this.loginForm.value.email, this.loginForm.value.password)){
+        this.loadingCtrl.dismiss();
+        this.router.navigate(['/home']);
+        this.loginForm.setValue({email: '', password: ''});
 
-    if(await this.authService.LoginUser(this.email, this.password)){
-      this.loadingCtrl.dismiss();
-      this.router.navigate(['/home']);
-      this.email = '';
-      this.password = '';
-    }else{
-      this.loadingCtrl.dismiss();
-      this.alertservice.Malcredenciales();
-      this.email = '';
-      this.password = '';
+      }else{
+        this.loadingCtrl.dismiss();
+        this.alertservice.Malcredenciales();
+        this.loginForm.setValue({email: '', password: ''});
+      }
     }
   }
 }

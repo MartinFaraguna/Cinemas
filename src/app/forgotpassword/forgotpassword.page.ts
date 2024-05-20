@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { AuthService } from '../shared/services/auth.service';
 import { AlertService } from '../shared/services/alert.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -10,22 +11,32 @@ import { AlertService } from '../shared/services/alert.service';
 })
 export class ForgotpasswordPage {
 
+  /**
+   * @var forgotPasswordForm
+   */
+  forgotPasswordForm: FormGroup;
+
 
   constructor(
     private authService: AuthService,
-    private alertService: AlertService
-  ) { }
+    private alertService: AlertService,
+    private formBuilder: FormBuilder
+  ) {
+    this.forgotPasswordForm=this.formBuilder.group({
+      email: ['',[Validators.required, Validators.email]]
+    })
+   }
 
-  email=""
+
 
   async sendPasswordResetEmail(): Promise<void> {
 
-    if(await this.authService.forgot(this.email)){
+    if(await this.authService.forgot(this.forgotPasswordForm.value.email)){
       this.alertService.presentAlertResetemail()
-      this.email=""
+      this.forgotPasswordForm.setValue({email: ''});
     }else{
-      this.alertService.Errorgeneric()
-      this.email=""
+      this.alertService.Errorgeneric("Verificar correo no registrado")
+      this.forgotPasswordForm.setValue({email: ''});
     }
   }
 

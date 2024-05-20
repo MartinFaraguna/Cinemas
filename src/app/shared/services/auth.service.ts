@@ -13,7 +13,13 @@ export class AuthService {
 
   constructor( ) { }
 
-  // Initialize Firebase
+  /**
+   * @description se inicializa firebase para poder realizar las consultas a firebase en
+   *              enveronment carga la caonfiguracion para la conexion a firebase
+   * @var app
+   * @var auth
+   *
+   */
   app = initializeApp(environment.firebase);
   auth = getAuth(this.app);
 
@@ -21,23 +27,39 @@ export class AuthService {
  * @function LoginUser
  * @param email
  * @param password
- * @desription realiza la autenticacion del usaurio recibiendo los parametros de email y password dando como resultado true o folse
- *
+ * @desription realiza la autenticacion del usaurio recibiendo los parametros de email y password
+ * dando como resultado true o false y se guarda el token en localStorage
  */
-  async LoginUser(email :string, password:string): Promise<boolean> {
+async  LoginUser(email :string, password:string): Promise<boolean> {
     let conecto:boolean=false;
+    let token:  string='';
 
-     await signInWithEmailAndPassword(this.auth, email, password)
-    .then(() => {
+    try{
+      await signInWithEmailAndPassword(this.auth, email, password)
+    .then(async (data) => {
       conecto = true;
+      token = (await data.user.getIdTokenResult()).token.toString();
+      localStorage.setItem('token',token);
     })
     .catch(() => {
       conecto=false;
     });
     return conecto;
 
+    }
+    catch(error){;
+      console.log(error);
+     return conecto;
+    }
+
   }
 
+  /**
+   * @function RegisterUser
+   * @param email
+   * @param password
+   * @description registra un nuevo usuario en firebase pasando el email y password
+   */
   async RegisterUser(email: string, password: string): Promise<boolean> {
     let conecto:boolean=false;
 
@@ -51,6 +73,11 @@ export class AuthService {
     return conecto;
   }
 
+  /**
+   * @function forgot
+   * @param email
+   * @descripcion envia un email para restablecer la contraseña
+   */
   async forgot(email:string):Promise<boolean>{
     let conecto:boolean=false;
 

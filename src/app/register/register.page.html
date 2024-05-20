@@ -7,49 +7,59 @@
       <ion-card>
         <img
           alt="Silhouette of mountains"
-          src="https://www.avilatinoamerica.com/images/stories/AVI/Cinemas_Procinal_incorpora_Vive_Audio_a_su_nuevo_multiplex.jpg"
+          src="../../assets/LogIn.jpg"
         />
         <ion-card-header>
           <ion-card-title>Register</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <ion-input
-            type="email"
-            fill="solid"
-            label="Email"
-            labelPlacement="floating"
-            helperText="Ingrese su email"
-            errorText="Invalid email"
-            [(ngModel)]="account.email"
-          ></ion-input>
+          <form [formGroup]="RegistroForm" (ngSubmit)="registerUser()">
+            <ion-input
+              type="email"
+              fill="solid"
+              label="Email"
+              labelPlacement="floating"
+              helperText="Ingrese su email"
+              errorText="Invalid email"
+              formControlName="email"
+            ></ion-input>
 
-          <br />
+            <br />
 
-          <ion-input
-            type="password"
-            fill="solid"
-            label="password"
-            labelPlacement="floating"
-            helperText="Ingrese una nueva contraseña"
-            [(ngModel)]="account.password"
-          ></ion-input>
-          <br />
-          <ion-input
-            type="password"
-            fill="solid"
-            label="password"
-            labelPlacement="floating"
-            helperText="Repita la contraseña"
-            [(ngModel)]="account.passwordV"
-          ></ion-input>
-          <br />
+            <ion-input
+              type="password"
+              fill="solid"
+              label="password"
+              labelPlacement="floating"
+              helperText="Ingrese una nueva contraseña"
+              errorText="Invalid password min 6 caracteres"
+              formControlName="password"
+            ></ion-input>
 
-          <ion-button
-            (click)="registerUser()"
-            color="success"
-            expand="block"
+            <br />
+
+            <ion-input
+              type="password"
+              fill="solid"
+              label="password"
+              labelPlacement="floating"
+              helperText="Repita la contraseña"
+              errorText="Invalid password min 6 caracteres"
+              formControlName="passwordv"
+            ></ion-input>
+
+
+            <br />
+
+            <ion-button
+              type="submit"
+              color="success"
+              expand="block"
+              [disabled]="RegistroForm.invalid"
             >Registrarse</ion-button
           >
+
+          </form>
 
           <ion-button
             routerLink="/"
