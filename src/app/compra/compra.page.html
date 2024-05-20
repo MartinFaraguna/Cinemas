@@ -34,7 +34,7 @@
           <img alt="Combo de bebida y Pochoclo" src="../../assets/combo.jpg" />
           <ion-card-header>
             <ion-card-title>Combo</ion-card-title>
-            <ion-card-subtitle>Bebida y pochoclo</ion-card-subtitle>
+            <ion-card-subtitle>Bebida y pochoclo 125$</ion-card-subtitle>
           </ion-card-header>
 
           <ion-card-content>
@@ -48,7 +48,7 @@
           <img alt="Pochoclo" src="../../assets/pochoclo.jpg" />
           <ion-card-header>
             <ion-card-title>Pochoclo</ion-card-title>
-            <ion-card-subtitle>Pochoclo</ion-card-subtitle>
+            <ion-card-subtitle>Pochoclo 150$</ion-card-subtitle>
           </ion-card-header>
 
           <ion-card-content>
@@ -62,7 +62,7 @@
           <img alt="Bebida" src="../../assets/bebida.png" />
           <ion-card-header>
             <ion-card-title>Bebidas</ion-card-title>
-            <ion-card-subtitle>Bebida </ion-card-subtitle>
+            <ion-card-subtitle>Bebida 150$</ion-card-subtitle>
           </ion-card-header>
 
           <ion-card-content>
@@ -86,7 +86,12 @@
       </ion-col>
       <ion-col size="12">
         <ion-label>
-          Total total de items: {{ selectedSeats.length+cantidadcombo+cantidadpochoclo+cantidadbebida }}
+          Total de items: {{ selectedSeats.length+cantidadcombo+cantidadpochoclo+cantidadbebida }}
+        </ion-label>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>
+          Total $ de items: {{ totalgasto}} $
         </ion-label>
       </ion-col>
 

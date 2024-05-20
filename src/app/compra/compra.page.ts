@@ -22,6 +22,7 @@ export class CompraPage {
   cantidadpochoclo: number = 0;
   cantidadbebida: number = 0;
 
+
   /**
    * @var isToastOpen
    * @description Variable para controlar el toast que iforma que realizo la compra
@@ -51,6 +52,8 @@ export class CompraPage {
   */
   selectedSeats: string[] = [];
 
+  totalgasto: number = 0;
+
   constructor( private router: Router,
                private pdfGenerator: PdfGeneratorService
   ) { }
@@ -76,8 +79,10 @@ export class CompraPage {
   selectSeat(seat: string): void {
     if (!this.selectedSeats.includes(seat)) {
       this.selectedSeats.push(seat); // Agregar butaca seleccionada
+      this.Sumadegasto();
     } else {
       this.selectedSeats = this.selectedSeats.filter(s => s !== seat); // Deseleccionar butaca
+      this.restagasto();
     }
   }
 
@@ -115,6 +120,8 @@ export class CompraPage {
     if(tipo == 'cantidadbebida'){
       this.cantidadbebida = cantidad + 1
     }
+
+    this.Sumadegasto();
   }
 
   /**
@@ -134,11 +141,30 @@ export class CompraPage {
       if(tipo == 'cantidadbebida'){
         this.cantidadbebida = cantidad - 1
       }
+
+      this.restagasto();
     }
   }
 
+  /**
+   * @description genera el pdf
+   */
   Ticket(){
-    this.pdfGenerator.generateAndSavePdf();
+    this.pdfGenerator.generateAndSavePdf(this.selectedSeats.length,this.cantidadcombo,this.cantidadpochoclo,this.cantidadbebida,this.totalgasto,this.selectedSeats );
     this.isToastOpen=true;
+  }
+
+  /**
+    * @description suma el gasto
+    */
+ Sumadegasto(){
+   this.totalgasto = (this.selectedSeats.length*700) + (this.cantidadcombo*125) + (this.cantidadpochoclo*150) + (this.cantidadbebida*150)
+  }
+
+  /**
+   * @description resta el gasto
+   */
+  restagasto(){
+    this.totalgasto = (this.selectedSeats.length*700) - (this.cantidadcombo*125) - (this.cantidadpochoclo*150) - (this.cantidadbebida*150)
   }
 }

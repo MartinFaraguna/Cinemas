@@ -49,6 +49,7 @@ export class LoginPage  {
       if(await this.authService.LoginUser(this.loginForm.value.email, this.loginForm.value.password)){
         this.loadingCtrl.dismiss();
         this.router.navigate(['/home']);
+        localStorage.setItem('User',  this.loginForm.value.email.split('@')[0]);
         this.loginForm.setValue({email: '', password: ''});
 
       }else{
